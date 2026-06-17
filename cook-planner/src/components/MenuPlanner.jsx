@@ -31,6 +31,7 @@ function detectQuantityItems(mealText) {
   return found
 }
 
+
 function QuantityFields({ meal, quantities, onChange }) {
   const items = detectQuantityItems(meal)
   if (items.length === 0) return null
@@ -73,7 +74,7 @@ useEffect(() => {
 
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/weekly-plans/active",
+  "https://meal-planner-jvf1.onrender.com/api/weekly-plans/active",
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -101,6 +102,32 @@ useEffect(() => {
       [day]: { ...prev[day], [field]: value }
     }))
   }
+
+const handleShareWhatsApp = () => {
+  if (!menuData || !days || !meals) return;
+
+  const link = "https://meal-planner-sigma-bay.vercel.app/meal-plan/active";
+
+let message = "🍱 *My Weekly Meal Plan*\n\n";
+ days.forEach(day => {
+    message += `📅 ${day}\n`;
+
+    meals.forEach(meal => {
+      const value = menuData?.[day]?.[meal];
+      if (value) {
+        message += `- ${meal}: ${value}\n`;
+      }
+    });
+
+    message += "\n";
+  });
+
+  message += `👉 View full plan: ${link}`;
+
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+
+  window.open(whatsappUrl, "_blank");
+}
 
   function updateQty(day, meal, key, value) {
     setMenuData(prev => ({
@@ -136,8 +163,15 @@ useEffect(() => {
     })
   }
 
-  return (
+  return (  
     <div>
+      <div className="top-bar">
+      <p className="section-label">Mon – Sat meal plan</p>
+
+      <button className="share-btn" onClick={handleShareWhatsApp}>
+        Share on WhatsApp 📲
+      </button>
+    </div>
       <p className="section-label">Mon – Sat meal plan</p>
 
     

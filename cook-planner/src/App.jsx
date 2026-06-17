@@ -188,6 +188,7 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/*" element={<PrivateRoute><MainApp /></PrivateRoute>} />
+          <Route path="/meal-plan/:id" element={<MealPlan />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
