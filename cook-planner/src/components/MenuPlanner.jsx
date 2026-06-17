@@ -108,26 +108,12 @@ const handleShareWhatsApp = () => {
 
   const link = "https://meal-planner-sigma-bay.vercel.app/meal-plan/active";
 
-let message = "🍱 *My Weekly Meal Plan*\n\n";
- days.forEach(day => {
-    message += `📅 ${day}\n`;
-
-    meals.forEach(meal => {
-      const value = menuData?.[day]?.[meal];
-      if (value) {
-        message += `- ${meal}: ${value}\n`;
-      }
-    });
-
-    message += "\n";
-  });
-
-  message += `👉 View full plan: ${link}`;
+  const message = `🍱 *My Weekly Meal Plan*\n\n👉 View full plan:\n${link}`;
 
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
 
   window.open(whatsappUrl, "_blank");
-}
+};
 
   function updateQty(day, meal, key, value) {
     setMenuData(prev => ({
