@@ -106,15 +106,15 @@ useEffect(() => {
 const handleShareWhatsApp = () => {
   if (!menuData || !days || !meals) return;
 
-  const link = "https://meal-planner-sigma-bay.vercel.app/meal-plan/active";
+  const link = window.location.href;
 
-  const message = `🍱 *My Weekly Meal Plan*\n\n👉 View full plan:\n${link}`;
+  const message = `🍱 *My Weekly Meal Plan*\n\n👉 View app here:\n${link}`;
 
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-
-  window.open(whatsappUrl, "_blank");
+  window.open(
+    `https://wa.me/?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
 };
-
   function updateQty(day, meal, key, value) {
     setMenuData(prev => ({
       ...prev,
@@ -158,7 +158,6 @@ const handleShareWhatsApp = () => {
         Share on WhatsApp 📲
       </button>
     </div>
-      <p className="section-label">Mon – Sat meal plan</p>
 
     
       {days.map(day => (
